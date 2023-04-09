@@ -7,6 +7,8 @@ import { useCallback, useEffect, useState } from "react";
 
 export default function Home() {
 	const [foo, setFoo] = useState(1);
+	const [text, setText] = useState("");
+	const [isShow, setIsShow] = useState(true);
 
 	// useCallbackを使うことによって、関数が再生成されなくなる
 	// const handleClick = useCallback((e) => {
@@ -20,6 +22,18 @@ export default function Home() {
 			setFoo((foo) => foo + 1);
 		}
 	}, [foo]);
+
+	const handleDisplay = useCallback(() => {
+		setIsShow((prev) => !prev);
+	}, []);
+
+	const handleChange = useCallback((e) => {
+		if (e.target.value.length > 5) {
+			alert("5文字以内にしてください。");
+			return;
+		}
+		setText(e.target.value.trim());
+	}, []);
 
 	useEffect(() => {
 		document.body.style.backgroundColor = "lightblue";
@@ -35,8 +49,10 @@ export default function Home() {
 			</Head>
 
 			<Header />
-			<h1>{foo}</h1>
+			{isShow ? <h1>{foo}</h1> : null}
 			<button onClick={handleClick}>ボタン</button>
+			<button onClick={handleDisplay}>{isShow ? "非表示" : "表示"}</button>
+			<input type="text" value={text} onChange={handleChange} />
 			<Main page="index" />
 
 			<Footer />
