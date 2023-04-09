@@ -8,17 +8,18 @@ import { useCallback, useEffect, useState } from "react";
 export default function Home() {
 	const [foo, setFoo] = useState(1);
 
-	const handleClick = (e) => {
-		setFoo((foo) => foo + 1);
-		setFoo((foo) => foo + 1);
-	};
-	// const foo = 1;
-
 	// useCallbackを使うことによって、関数が再生成されなくなる
 	// const handleClick = useCallback((e) => {
 	// 	e.preventDefault();
 	// 	alert(123);
 	// }, []);
+
+	// 第２引数の中が空であれば、再生成されないのでfooの中身は1のままになる
+	const handleClick = useCallback(() => {
+		if (foo < 10) {
+			setFoo((foo) => foo + 1);
+		}
+	}, [foo]);
 
 	useEffect(() => {
 		document.body.style.backgroundColor = "lightblue";
