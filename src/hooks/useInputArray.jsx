@@ -15,7 +15,8 @@ export const useInputArray = () => {
 
 	const handleAdd = useCallback(() => {
 		setArray((prev) => {
-			if (prev.some((item) => item === text)) {
+			// 配列の中が文字列なので　includesを使うことができる。
+			if (prev.includes(text)) {
 				alert("同じ要素がすでに存在します。");
 				setText("");
 				return prev;
