@@ -4,7 +4,7 @@ import { Header } from "src/components/Header";
 import { useEffect, useState, useCallback } from "react";
 import { Posts } from "src/components/Posts";
 
-const Home = (props) => {
+const Home = () => {
 	return (
 		<div className={styles.container}>
 			<Head>
